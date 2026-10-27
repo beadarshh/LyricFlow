@@ -1,0 +1,149 @@
+<Window x:Class="LyricFlow.UI.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LyricFlow Settings"
+        Width="520"
+        SizeToContent="Height"
+        MaxHeight="780"
+        ResizeMode="NoResize"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" /> <!-- 0 General -->
+                <RowDefinition Height="Auto" /> <!-- 1 Style -->
+                <RowDefinition Height="Auto" /> <!-- 2 Font -->
+                <RowDefinition Height="Auto" /> <!-- 3 Size -->
+                <RowDefinition Height="Auto" /> <!-- 4 Width -->
+                <RowDefinition Height="Auto" /> <!-- 5 Background -->
+                <RowDefinition Height="Auto" /> <!-- 6 Opacity -->
+                <RowDefinition Height="Auto" /> <!-- 7 Timing -->
+                <RowDefinition Height="Auto" /> <!-- 8 Hotkey -->
+                <RowDefinition Height="Auto" /> <!-- 9 Centre on hotkey -->
+                <RowDefinition Height="Auto" /> <!-- 10 Kinetic header -->
+                <RowDefinition Height="Auto" /> <!-- 11 Block colour -->
+                <RowDefinition Height="Auto" /> <!-- 12 Sung word colour -->
+                <RowDefinition Height="Auto" /> <!-- 13 Words per page -->
+                <RowDefinition Height="Auto" /> <!-- 14 Tilt -->
+                <RowDefinition Height="Auto" /> <!-- 15 Size variety -->
+                <RowDefinition Height="Auto" /> <!-- 16 Pop -->
+                <RowDefinition Height="Auto" /> <!-- 17 Classic header -->
+                <RowDefinition Height="Auto" /> <!-- 18 Base colour -->
+                <RowDefinition Height="Auto" /> <!-- 19 Highlight colour -->
+                <RowDefinition Height="Auto" /> <!-- 20 Mini -->
+                <RowDefinition Height="Auto" /> <!-- 21 Reset -->
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="0,5" />
+                </Style>
+                <Style TargetType="Control">
+                    <Setter Property="Margin" Value="0,5" />
+                </Style>
+                <Style x:Key="Header" TargetType="TextBlock">
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="Margin" Value="0,14,0,2" />
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="General" Style="{StaticResource Header}" Margin="0,0,0,2" />
+
+            <TextBlock Grid.Row="1" Text="Style" />
+            <ComboBox x:Name="StyleBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="OnChanged" />
+
+            <TextBlock Grid.Row="2" Text="Font" />
+            <ComboBox x:Name="FontBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="OnChanged" />
+
+            <TextBlock Grid.Row="3" Text="Size" />
+            <Slider x:Name="SizeSlider" Grid.Row="3" Grid.Column="1" Minimum="18" Maximum="120" ValueChanged="OnChanged" />
+            <TextBlock x:Name="SizeLabel" Grid.Row="3" Grid.Column="2" Margin="10,5,0,5" Width="50" />
+
+            <TextBlock Grid.Row="4" Text="Window width" />
+            <Slider x:Name="WidthSlider" Grid.Row="4" Grid.Column="1" Minimum="400" Maximum="1800" ValueChanged="OnChanged" />
+            <TextBlock x:Name="WidthLabel" Grid.Row="4" Grid.Column="2" Margin="10,5,0,5" Width="50" />
+
+            <TextBlock Grid.Row="5" Text="Background" />
+            <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="BackgroundModeBox" SelectionChanged="OnChanged" />
+                <TextBox x:Name="BackgroundBox" Grid.Column="1" Margin="8,5,0,5" TextChanged="OnChanged"
+                         ToolTip="Custom colour as #RRGGBB, or #AARRGGBB to make it see-through" />
+                <Button x:Name="PickBackgroundButton" Grid.Column="2" Content="Pick..." Padding="10,2" Margin="6,5,0,5" Click="OnPickBackground" />
+                <Border x:Name="BackgroundSwatch" Grid.Column="3" Width="24" Height="24" Margin="8,0,0,0" BorderBrush="Gray" BorderThickness="1" />
+            </Grid>
+
+            <TextBlock Grid.Row="6" Text="Opacity" />
+            <Slider x:Name="OpacitySlider" Grid.Row="6" Grid.Column="1" Minimum="0.2" Maximum="1" ValueChanged="OnChanged" />
+            <TextBlock x:Name="OpacityLabel" Grid.Row="6" Grid.Column="2" Margin="10,5,0,5" Width="50" />
+
+            <TextBlock Grid.Row="7" Text="Timing (ms)" ToolTip="Positive shows lyrics earlier, negative later" />
+            <Slider x:Name="OffsetSlider" Grid.Row="7" Grid.Column="1" Minimum="-2000" Maximum="2000" TickFrequency="50" IsSnapToTickEnabled="True" ValueChanged="OnChanged" />
+            <TextBlock x:Name="OffsetLabel" Grid.Row="7" Grid.Column="2" Margin="10,5,0,5" Width="50" />
+
+            <TextBlock Grid.Row="8" Text="Show / hide hotkey" />
+            <TextBox x:Name="HotkeyBox" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True" PreviewKeyDown="OnHotkeyKeyDown"
+                     ToolTip="Click here, then press the new combination" />
+
+            <StackPanel Grid.Row="9" Grid.ColumnSpan="3">
+                <CheckBox x:Name="CenterBox" Content="Hotkey opens the overlay in the centre of the screen"
+                          Checked="OnChanged" Unchecked="OnChanged" />
+                <CheckBox x:Name="CoverBox" Content="Black / custom background covers the whole screen (double-click or Esc hides it)"
+                          Checked="OnChanged" Unchecked="OnChanged" />
+            </StackPanel>
+
+            <TextBlock Grid.Row="10" Grid.ColumnSpan="3" Text="Kinetic style" Style="{StaticResource Header}" />
+
+            <TextBlock Grid.Row="11" Text="Block colour" ToolTip="The block behind the word being sung" />
+            <TextBox x:Name="BlockBox" Grid.Row="11" Grid.Column="1" TextChanged="OnChanged" />
+            <Border x:Name="BlockSwatch" Grid.Row="11" Grid.Column="2" Width="24" Height="24" Margin="10,0,0,0" BorderBrush="Gray" BorderThickness="1" />
+
+            <TextBlock Grid.Row="12" Text="Sung word colour" ToolTip="Words already sung on the page" />
+            <TextBox x:Name="WordBox" Grid.Row="12" Grid.Column="1" TextChanged="OnChanged" />
+            <Border x:Name="WordSwatch" Grid.Row="12" Grid.Column="2" Width="24" Height="24" Margin="10,0,0,0" BorderBrush="Gray" BorderThickness="1" />
+
+            <TextBlock Grid.Row="13" Text="Words per page" ToolTip="How many words stack before the page clears" />
+            <Slider x:Name="PerPageSlider" Grid.Row="13" Grid.Column="1" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="OnChanged" />
+            <TextBlock x:Name="PerPageLabel" Grid.Row="13" Grid.Column="2" Margin="10,5,0,5" Width="50" />
+
+            <TextBlock Grid.Row="14" Text="Tilt" ToolTip="Maximum tilt of a word, in degrees" />
+            <Slider x:Name="TiltSlider" Grid.Row="14" Grid.Column="1" Minimum="0" Maximum="10" ValueChanged="OnChanged" />
+            <TextBlock x:Name="TiltLabel" Grid.Row="14" Grid.Column="2" Margin="10,5,0,5" Width="50" />
+
+            <TextBlock Grid.Row="15" Text="Size variety" ToolTip="How much word sizes differ" />
+            <Slider x:Name="VarietySlider" Grid.Row="15" Grid.Column="1" Minimum="0" Maximum="1" ValueChanged="OnChanged" />
+            <TextBlock x:Name="VarietyLabel" Grid.Row="15" Grid.Column="2" Margin="10,5,0,5" Width="50" />
+
+            <CheckBox x:Name="PopBox" Grid.Row="16" Grid.ColumnSpan="3" Content="Words pop in with a small bounce" Checked="OnChanged" Unchecked="OnChanged" />
+
+            <TextBlock Grid.Row="17" Grid.ColumnSpan="3" Text="Classic style" Style="{StaticResource Header}" />
+
+            <TextBlock Grid.Row="18" Text="Base colour" ToolTip="Words not yet sung" />
+            <TextBox x:Name="BaseBox" Grid.Row="18" Grid.Column="1" TextChanged="OnChanged" />
+            <Border x:Name="BaseSwatch" Grid.Row="18" Grid.Column="2" Width="24" Height="24" Margin="10,0,0,0" BorderBrush="Gray" BorderThickness="1" />
+
+            <TextBlock Grid.Row="19" Text="Highlight colour" ToolTip="Words as they are sung" />
+            <TextBox x:Name="HighlightBox" Grid.Row="19" Grid.Column="1" TextChanged="OnChanged" />
+            <Border x:Name="HighlightSwatch" Grid.Row="19" Grid.Column="2" Width="24" Height="24" Margin="10,0,0,0" BorderBrush="Gray" BorderThickness="1" />
+
+            <CheckBox x:Name="MiniBox" Grid.Row="20" Grid.ColumnSpan="3" Content="Mini mode (current line only)" Checked="OnChanged" Unchecked="OnChanged" />
+
+            <StackPanel Grid.Row="21" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,14,0,0">
+                <Button Content="Reset position" Padding="12,4" Click="OnResetPosition" />
+                <TextBlock x:Name="StatusText" Margin="14,0,0,0" Foreground="#C0392B" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

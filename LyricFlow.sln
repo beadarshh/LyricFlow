@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0F99A862-A682-40D9-B592-752957685564}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LyricFlow", "src\LyricFlow\LyricFlow.csproj", "{344E0809-0688-46E9-AA89-E147B15ED0A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DAD3BF5E-67E9-4424-A805-AA3F768A5777}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LyricFlow.Tests", "tests\LyricFlow.Tests\LyricFlow.Tests.csproj", "{8FDF8FFF-E2F8-4448-ABE1-F67489053D72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{344E0809-0688-46E9-AA89-E147B15ED0A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{344E0809-0688-46E9-AA89-E147B15ED0A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{344E0809-0688-46E9-AA89-E147B15ED0A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{344E0809-0688-46E9-AA89-E147B15ED0A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FDF8FFF-E2F8-4448-ABE1-F67489053D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FDF8FFF-E2F8-4448-ABE1-F67489053D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FDF8FFF-E2F8-4448-ABE1-F67489053D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FDF8FFF-E2F8-4448-ABE1-F67489053D72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{344E0809-0688-46E9-AA89-E147B15ED0A0} = {0F99A862-A682-40D9-B592-752957685564}
+		{8FDF8FFF-E2F8-4448-ABE1-F67489053D72} = {DAD3BF5E-67E9-4424-A805-AA3F768A5777}
+	EndGlobalSection
+EndGlobal
